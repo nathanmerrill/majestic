@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://jwpxfwvj0oai"]
+
+[ext_resource type="Script" path="res://map.gd" id="1_twoa1"]
+[ext_resource type="Texture2D" uid="uid://de1ubr52wdi3j" path="res://icon.svg" id="2_er72g"]
+[ext_resource type="Script" path="res://PrimaryCamera.gd" id="3_cb2sx"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_l7yp2"]
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[node name="Game" type="Node"]
+
+[node name="Map" type="Node2D" parent="."]
+script = ExtResource("1_twoa1")
+
+[node name="Castle" type="Sprite2D" parent="Map"]
+texture = ExtResource("2_er72g")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Map/Castle"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Map"]
+navigation_polygon = SubResource("NavigationPolygon_l7yp2")
+
+[node name="PrimaryCamera" type="Camera2D" parent="Map"]
+editor_draw_limits = true
+script = ExtResource("3_cb2sx")
