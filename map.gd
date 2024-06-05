@@ -3,6 +3,9 @@ extends Node2D
 var size = Vector2i(4000,4000);
 var texture: Texture2D = null
 var map_texture: Texture2D
+var brown = Color(0.305098, 0.130588, 0.0845098, 1)
+var dark_brown = Color(0.115098, 0.140588, 0.0845098, 1)
+var green = Color(0.0143, 0.222157, 0.0143, 1)
 
 @onready var castle = $Castle;
 @onready var camera = $PrimaryCamera;
@@ -19,8 +22,11 @@ func generate_map():
 	map_texture.width = size.x
 	map_texture.height = size.y
 
-	## map_texture.color_ramp = Gradient.new()
-	## map_texture.color_ramp.colors = PackedColorArray([Color.SADDLE_BROWN, Color.DARK_GREEN])
+	map_texture.color_ramp = Gradient.new()
+	
+	map_texture.color_ramp.colors = PackedColorArray([brown, dark_brown, green])
+	map_texture.color_ramp.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CONSTANT
+	map_texture.color_ramp.offsets = [0,0.5,0.51]
 	var noise = FastNoiseLite.new()
 	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
 	noise.frequency = 0.001
